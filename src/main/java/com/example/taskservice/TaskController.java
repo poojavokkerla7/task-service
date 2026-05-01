@@ -1,22 +1,24 @@
 package com.example.taskservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import jakarta.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private List<String> tasks = new ArrayList<>();
+    @Autowired
+    private TaskRepository repo;
 
     @PostMapping
-    public String addTask(@RequestBody String task) {
-        tasks.add(task);
-        return "Task Added";
+    public Task addTask(@RequestBody @Valid Task task) {
+        return repo.save(task);
     }
 
     @GetMapping
-    public List<String> getTasks() {
-        return tasks;
+    public List<Task> getTasks() {
+        return repo.findAll();
     }
 }
