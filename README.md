@@ -1,38 +1,53 @@
-# Task Service
+Task Service - Microservices (Week 6)
 
-## Overview
-Task Service handles task-related operations such as creating and retrieving tasks.
+Overview
+Task Service is a Spring Boot microservice that manages tasks.
+It uses MySQL for persistence and includes validation and exception handling.
 
----
+Features
+- Create tasks
+- Fetch all tasks
+- MySQL database integration
+- JPA and Hibernate ORM
+- Input validation using NotBlank
+- Global exception handling
 
-## Features
-- Add Task
-- View Tasks
-- Stores task data in memory
+Tech Stack
+- Java 17
+- Spring Boot
+- MySQL
+- Spring Data JPA
+- Maven
 
----
-
-## Port
-Runs on: 8082
-
----
-
-## API Endpoints
-
-POST /tasks  
-GET /tasks  
-
----
-
-## How to Run
-
+Run Application
 mvn spring-boot:run
 
-Open:
-http://localhost:8082
+API Endpoints
 
----
+Add Task
+POST /tasks
 
-## Architecture Role
+Request Body
+{
+  "task": "Complete Week 6"
+}
 
-Task Service provides task data and is called by User Service using REST API.
+Get Tasks
+GET /tasks
+
+Validation
+- Task cannot be empty
+
+Database
+- Database name: microservices_db
+- Table: task
+
+Architecture
+
+Client (Postman)
+      |
+      v
+Task Service (8082)
+      |
+      v
+MySQL Database
